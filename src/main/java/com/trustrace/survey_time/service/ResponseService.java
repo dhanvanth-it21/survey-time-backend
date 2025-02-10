@@ -3,6 +3,7 @@ package com.trustrace.survey_time.service;
 
 
 import com.trustrace.survey_time.model.Response;
+import com.trustrace.survey_time.model.ResponseCard;
 import com.trustrace.survey_time.repository.ResponseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,11 +35,30 @@ public class ResponseService {
 
     //get all response by email id
     public List<Response> getAllResponseByEmailId(String email) {
-        return null;
+
+        List<Response> responseList = responseRepository.findAll();
+        return responseList;
     }
 
     //delete survey by id (DELETE request)
     public void deleteResponse(String id) {
         responseRepository.deleteById(id);
+    }
+
+    public List<ResponseCard> getAllResponseCards() {
+        List<Response> responses =  responseRepository.findAll();
+
+        List<ResponseCard> responseCards = responses.stream().map(
+                response -> {
+                    ResponseCard responseCard = new ResponseCard();
+                    responseCard.setId(response.getId());
+                    responseCard.setSurveyId(response.getSurveyId());
+                    responseCard.setName(response.getName());
+                    responseCard.setEmail(response.getEmail());
+                    return  responseCard;
+                }
+        ).toList();
+
+        return responseCards;
     }
 }
