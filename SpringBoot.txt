@@ -1,0 +1,159 @@
+SpringBoot documentation : BY me Dhanvanth S B
+
+*. @SpringBootApplication -> annotation used to mark the class as spring boot application
+    \_> equivalent to @Configuration, @EnableAutoConfiguration, @ComponentScan
+    |_> Enables automatic configuration based on classpath dependencies.
+
+--------------------------------------------Lombok : reduces boilerplate code and improves readability
+setup : 
+
+<dependency>
+    <groupId>org.projectlombok</groupId>
+    <artifactId>lombok</artifactId>
+    <version>1.18.36</version>
+    <scope>provided</scope>
+</dependency>
+
+*. @Data -> combination of @Getter, @Setter, @ToString, @EqualsAndHashCode, @RequiredArgsConstructor
+
+*. @NoArgsConstructor -> empty constructor generation
+
+*. @AllArgsConstructor -> all argument passed constructor generation
+
+*. @RequiredArgsConstructor -> generate constructor with required field (final fields only) as parameter 
+
+*. @Getter & @Setter -> generate getters and setters for the field in the class
+
+*. @ToString -> generate toString method for the class
+
+*. @EqualsAndHashCode -> generate equals and hashcode method for the class
+
+---------------------------------------------Spring framework data annotation
+
+*. @Id -> primary key
+
+---------------------------------------------Spring framework data MongoDB core mapping annotation
+
+*. @Document -> collection name
+    |_> parameter : collection = "collectionName"
+    |_> eg: @Document(collection = "user")
+
+*. MongoTemplate -> core class for MongoDB interaction
+
+*. MongoRepository -> interface for MongoDB repository
+
+---------------------------------------------Spring framework web bind annotation
+
+*. @RestController -> combination of @Controller and @ResponseBody, making restful web services
+    |_> REST API : GET (retrieve), POST (create), PUT (update), DELETE (delete)
+    |_> @GetMapping(""), @PostMapping(""), @PutMapping(""), @DeleteMapping("")
+    |_> returning the object as JSON data (object to JSON data conversion)
+
+*. @RequestMapping -> mapping the request to the URL pathname
+    |_> parameter : value = "url", method = methodType
+    |_> eg: @RequestMapping(value = "/user", method = RequestMethod.GET)
+
+*. @RequestBody -> map the HTTP request body to the Java object (JSON data to object conversion)
+    |_> eg: public String createUser(@RequestBody User user) {}
+    |_> most commonly used with POST method and PUT method
+
+*. @RequestParam -> map the request parameter to the method parameter
+    |_> extracts parameters sent after the ? in the URL and passes them to the method as arguments.
+    |_> eg: public String getUser(@RequestParam String id) {}
+    |_> default value : @RequestParam(defaultValue = "default") String id
+    |_> most commonly used with GET method
+
+*. @PathVariable -> map the URL path variable to the method parameter
+    |_> extracts parameters from the URL itself and passes them to the method as arguments.
+    |_> eg: public String getUser(@PathVariable String id) {}
+    |_> most commonly used with GET method
+
+---------------------------------------------Spring framework bean factory annotation
+
+*. @Autowired -> automatic dependency injection
+    |_> automatically creating and managing the objects
+    |_> mainly used in service and repository layers
+    |_> automatically injects (provides) the required bean (object) into a class without manually creating it using new.
+    |_> injecting object should be a bean (object) created by spring container (@Component, @Service, @Repository, @Controller)
+
+---------------------------------------------Spring framework context annotation
+
+*. @Lazy -> delay the creation (initialization) of a Spring bean until it is actually needed
+
+---------------------------------------------Spring framework stereotype annotation
+
+*. @Service -> mark a class as a service class
+    |_> specialization of @Component -> spring automatically detects the class and registers it as a bean in the application context
+    |_> spring detects @Service and registers class as a bean
+
+*. @Repository -> mark a class as a repository class
+    |_> specialization of @Component -> spring automatically detects the class and registers it as a bean in the application context
+    |_> spring detects @Repository and registers class as a bean
+    |_> marks the class as a data access object (DAO) -> used to perform database operations (CRUD operations)
+
+
+-------------------------------------------------data flow in spring boot application
+controller layer -> builder layer -> service layer -> repository layer -> DAO layer -> repository layer -> service layer -> builder layer -> controller layer
+
+Pseudocode for Data Flow
+Controller Layer:  
+    Receives HTTP request.
+    Calls the Builder Layer.
+Builder Layer:  
+    Constructs DTOs.
+    Calls the Service Layer.
+Service Layer:  
+    Processes business logic.
+    Calls the Repository Layer.
+Repository Layer:  
+    Interacts with the MongoTemplate.
+    Calls the DAO Layer.
+DAO Layer:  
+    Interacts with the database.
+    Returns data to the Repository Layer.
+Repository Layer:  
+    Returns data to the Service Layer.
+Service Layer:  
+    Processes the data.
+    Returns data to the Builder Layer.
+Builder Layer:  
+    Constructs the final response DTO.
+    Returns data to the Controller Layer.
+Controller Layer:
+    Sends HTTP response.
+
+
+---------------------------------------------------used annotation in spring boot application
+@SpringBootApplication
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@RequiredArgsConstructor
+@Getter
+@Setter
+@ToString
+@EqualsAndHashCode
+@Id
+@Document
+@RestController
+@RequestMapping
+@RequestBody
+@RequestParam
+@PathVariable
+@Autowired
+@Lazy
+@Service
+@Repository
+
+
+
+controller -> service -> dao -> MongoTemplate
+
+
+MongoTemplate ->Dao -> Service -> controller
+
+
+
+controller -> service -> dao -> MongoTemplate
+
+MongoTemplate(gets model and returns model) -> dao(gets model and returns dto) -> service(gets dto and returns dto) -> controller(gets dto and returns dto)
