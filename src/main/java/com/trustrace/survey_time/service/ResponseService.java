@@ -36,7 +36,9 @@ public class ResponseService {
     //get all response by email id
     public List<Response> getAllResponseByEmailId(String email) {
 
-        List<Response> responseList = responseRepository.findAll();
+        List<Response> responseList = responseRepository.findAll().stream().filter(
+                response -> response.getEmail().equals(email)
+        ).toList();
         return responseList;
     }
 

@@ -39,4 +39,9 @@ public class SurveyController {
     public void deleteSurvey(@PathVariable String id) {
         surveyService.deleteSurvey(id);
     }
+
+    @GetMapping("/survey-cards/{emailId}")
+    public List<SurveyCard> getPendingSurveyCards(@PathVariable String emailId) {
+        return surveyService.getPendingSurveyCards(emailId);
+    }
 }
