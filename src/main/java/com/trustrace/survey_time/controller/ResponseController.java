@@ -36,4 +36,9 @@ public class ResponseController {
     public Response getResponseById(@PathVariable String id) {
         return responseService.getReponseById(id);
     }
+
+    @GetMapping("/survey/{surveyId}")
+    public List<ResponseCard> getAllResponseBySurveyId(@PathVariable String surveyId) {
+        return responseService.getAllResponseBySurveyId(surveyId);
+    }
 }

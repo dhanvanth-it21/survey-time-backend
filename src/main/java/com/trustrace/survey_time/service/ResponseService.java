@@ -61,4 +61,22 @@ public class ResponseService {
 
         return responseCards;
     }
+
+    public List<ResponseCard> getAllResponseBySurveyId(String surveyId) {
+        List<Response> responses =  responseRepository.findAll();
+
+        List<ResponseCard> responseCards = responses.stream()
+                .filter( reponse -> reponse.getSurveyId().equals(surveyId))
+                .map(response -> {
+                    ResponseCard responseCard = new ResponseCard();
+                    responseCard.setId(response.getId());
+                    responseCard.setSurveyId(response.getSurveyId());
+                    responseCard.setName(response.getName());
+                    responseCard.setEmail(response.getEmail());
+                    return  responseCard;
+                })
+                .toList();
+
+        return responseCards;
+    }
 }
