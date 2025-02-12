@@ -81,4 +81,8 @@ public class ResponseService {
 
         return responseCards;
     }
+
+    public void deleteResponseBySurveyId(String surveyId) {
+        responseRepository.deleteBySurveyId(surveyId);
+    }
 }

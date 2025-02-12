@@ -41,4 +41,14 @@ public class ResponseController {
     public List<ResponseCard> getAllResponseBySurveyId(@PathVariable String surveyId) {
         return responseService.getAllResponseBySurveyId(surveyId);
     }
+
+    @DeleteMapping("/{responseId}")
+    public void deleteResponse(@PathVariable String responseId) {
+        responseService.deleteResponse(responseId);
+    }
+
+    @DeleteMapping("/survey/{surveyId}")
+    public void deleteResponseBySurveyId(@PathVariable String surveyId) {
+        responseService.deleteResponseBySurveyId(surveyId);
+    }
 }

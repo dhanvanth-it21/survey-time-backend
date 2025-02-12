@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ResponseRepository extends MongoRepository<Response, String> {
+    void deleteBySurveyId(String surveyId);
 }
