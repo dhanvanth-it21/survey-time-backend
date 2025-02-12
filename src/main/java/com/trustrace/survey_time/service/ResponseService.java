@@ -4,6 +4,7 @@ package com.trustrace.survey_time.service;
 
 import com.trustrace.survey_time.model.Response;
 import com.trustrace.survey_time.model.ResponseCard;
+import com.trustrace.survey_time.model.Survey;
 import com.trustrace.survey_time.repository.ResponseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -47,6 +48,7 @@ public class ResponseService {
         responseRepository.deleteById(id);
     }
 
+    //get all response cards
     public List<ResponseCard> getAllResponseCards() {
         List<Response> responses =  responseRepository.findAll();
 
@@ -64,6 +66,7 @@ public class ResponseService {
         return responseCards;
     }
 
+    //get all response card os particular survey
     public List<ResponseCard> getAllResponseBySurveyId(String surveyId) {
         List<Response> responses =  responseRepository.findAll();
 
@@ -82,7 +85,9 @@ public class ResponseService {
         return responseCards;
     }
 
+    //delete all responses of the particular survey
     public void deleteResponseBySurveyId(String surveyId) {
         responseRepository.deleteBySurveyId(surveyId);
     }
+
 }

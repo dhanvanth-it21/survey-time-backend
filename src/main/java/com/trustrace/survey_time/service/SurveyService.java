@@ -49,13 +49,15 @@ public class SurveyService {
             surveyCard.setId(survey.getId());
             surveyCard.setTitle((String) survey.getSurveyObject().get("title"));
             surveyCard.setDescription((String) survey.getSurveyObject().get("description"));
+            surveyCard.setActive((Boolean) survey.getSurveyObject().get("active"));
             return surveyCard;
         }).toList();
         return surveyCards;
     }
 
+    //get all pending survey cards for the user of particular email id
     public List<SurveyCard> getPendingSurveyCards(String emailId) {
-        List<Survey> surveys = surveyRepository.findAll(); // retrives all the surveys
+        List<Survey> surveys = getActiveSurveys(); // retrives all the surveys
         List<Response> responses = responseService.getAllResponseByEmailId(emailId); //responses of the particular user
         List<String> surveyIds = responses.stream().map(
                 response -> {
@@ -72,9 +74,19 @@ public class SurveyService {
                     surveyCard.setId(survey.getId());
                     surveyCard.setTitle((String) survey.getSurveyObject().get("title"));
                     surveyCard.setDescription((String) survey.getSurveyObject().get("description"));
+                    surveyCard.setActive((Boolean) survey.getSurveyObject().get("active"));
                     return surveyCard;
                 })
                 .toList();
         return pendingSurveys;
+    }
+
+    List<Survey> getActiveSurveys() {
+        return surveyRepository.findAll().stream().filter(
+                survey -> {
+                    boolean actvieStatus = (boolean) survey.getSurveyObject().getOrDefault("active", false);
+                    return actvieStatus == true;
+                }
+        ).toList();
     }
 }

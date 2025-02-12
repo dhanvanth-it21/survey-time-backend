@@ -11,6 +11,7 @@ public class SurveyCard {
     private String id;
     private String title;
     private String description;
+    private Boolean active;
 
     public String getTitle() {
         return title;
@@ -34,5 +35,13 @@ public class SurveyCard {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
     }
 }
