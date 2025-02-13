@@ -12,6 +12,7 @@ public class ResponseCard {
     private String surveyId;
     private String name;
     private String email;
+    private String surveyTitle;
 
     public String getId() {
         return id;
@@ -43,5 +44,13 @@ public class ResponseCard {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getSurveyTitle() {
+        return surveyTitle;
+    }
+
+    public void setSurveyTitle(String surveyTitle) {
+        this.surveyTitle = surveyTitle;
     }
 }
