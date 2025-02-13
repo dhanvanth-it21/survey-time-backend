@@ -89,4 +89,14 @@ public class SurveyService {
                 }
         ).toList();
     }
+
+    public void updateActiveStatus(String surveyId) {
+        Survey survey = surveyRepository.findById(surveyId).orElse(null);
+        if(survey != null) {
+            Boolean isActive = (Boolean) survey.getSurveyObject().get("active");
+            survey.getSurveyObject().put("active", !isActive);
+            surveyRepository.save(survey);
+
+        }
+    }
 }

@@ -44,4 +44,9 @@ public class SurveyController {
     public List<SurveyCard> getPendingSurveyCards(@PathVariable String emailId) {
         return surveyService.getPendingSurveyCards(emailId);
     }
+
+    @PutMapping("/active-status/{surveyId}")
+    public void updateActiveStatus(@PathVariable String surveyId) {
+        surveyService.updateActiveStatus(surveyId);
+    }
 }
