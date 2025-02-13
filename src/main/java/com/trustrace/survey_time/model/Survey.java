@@ -32,4 +32,6 @@ public class Survey {
     public void setSurveyObject(Map<String, Object> surveyObject) {
         this.surveyObject = surveyObject;
     }
+
+
 }

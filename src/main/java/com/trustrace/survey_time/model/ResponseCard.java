@@ -18,6 +18,17 @@ public class ResponseCard {
         return id;
     }
 
+    public ResponseCard(String id, String surveyId, String name, String email, String surveyTitle) {
+        this.id = id;
+        this.surveyId = surveyId;
+        this.name = name;
+        this.email = email;
+        this.surveyTitle = surveyTitle;
+    }
+
+    public ResponseCard() {
+    }
+
     public void setId(String id) {
         this.id = id;
     }
